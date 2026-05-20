@@ -92,6 +92,32 @@ A GitHub Actions workflow runs every Monday and:
 
 Maintenance becomes optional triage rather than active work.
 
+## Curation
+
+A local curation agent helps discover new sources and surface landmark posts from
+existing ones. It runs entirely within Claude Code — no API key needed.
+
+**Requirements:** Claude Code (Claude Pro), Python 3.11+
+
+```bash
+python -m pip install pyyaml feedparser
+python curate.py          # ~1 min — fetches recent RSS data from all sources
+```
+
+Then open Claude Code in this directory and say: **run curation**
+
+Claude reads the gathered RSS data, searches the web for new source candidates,
+and writes `CURATION_REPORT.md` — a structured checklist of proposals. Review it,
+apply the items you agree with to `sources.yaml`, then:
+
+```bash
+python generate_opml.py
+git add sources.yaml sources.opml
+git commit -m "curate: YYYY-MM-DD curation pass"
+```
+
+See `SETUP.md` for the full curation workflow.
+
 ## Contributing
 
 Read [`contributing.md`](contributing.md) for the full guide. The short version:

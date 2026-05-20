@@ -81,3 +81,78 @@ ai-signal/
 pip install pyyaml
 python generate_opml.py
 ```
+
+---
+
+## 4. Running the curation agent
+
+The curation agent discovers new AI sources and surfaces landmark-worthy posts
+from existing ones. Anyone with Claude Code (Claude Pro) can run it.
+
+### Prerequisites
+
+```bash
+python -m pip install pyyaml feedparser
+```
+
+### Workflow
+
+**1. Gather RSS data (~1 min)**
+
+```bash
+python curate.py
+```
+
+This reads all sources from `sources.yaml`, fetches the last 90 days of posts
+from each RSS feed, and writes `_curate_context.json`. This file is gitignored.
+
+**2. Run the curation agent**
+
+Open Claude Code in this directory and say:
+
+> run curation
+
+Claude will:
+- Read the RSS context
+- Identify posts on existing sources that look landmark-worthy
+- Search the web for new AI sources that meet the curation criteria
+- Flag any sources with no recent posts (activity status candidates)
+
+**3. Review `CURATION_REPORT.md`**
+
+Claude writes a structured checklist. Each item is a checkbox. Review the
+proposals and tick the ones you want to apply.
+
+**4. Apply changes and commit**
+
+For each checked item, edit `sources.yaml` directly. Then:
+
+```bash
+python generate_opml.py
+git add sources.yaml sources.opml
+git commit -m "curate: YYYY-MM-DD curation pass"
+git push
+```
+
+GitHub Pages redeploys automatically within ~2 minutes.
+
+### Frequency
+
+Run the curation agent monthly, or whenever you want to refresh the list.
+The existing staleness workflow (GitHub Actions, every Monday) already handles
+dead feed detection — the curation agent goes deeper: quality, discovery,
+landmark posts.
+
+### Troubleshooting
+
+**`curate.py` exits with "Missing deps"**
+```bash
+python -m pip install pyyaml feedparser
+```
+
+**Claude says `_curate_context.json` not found**
+Run `python curate.py` first, then ask Claude to run curation again.
+
+**A feed returns 0 recent posts but the source is clearly active**
+Some feeds use non-standard date fields. Claude will flag this in the Notes
+section of the report — verify manually.

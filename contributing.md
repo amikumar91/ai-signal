@@ -105,6 +105,25 @@ Open an issue before removing — sometimes someone has context on why a source 
 - Include the `last_checked` date as today's YYYY-MM
 - Regenerate `sources.opml` before submitting (`python generate_opml.py`)
 
+## Using the curation agent
+
+The curation agent is the recommended way to discover new sources and audit
+existing ones for landmark post candidates.
+
+See `SETUP.md §4` for the full workflow. Short version:
+
+```bash
+python -m pip install pyyaml feedparser
+python curate.py           # gather RSS data
+# open Claude Code → say: run curation
+# review CURATION_REPORT.md → apply to sources.yaml
+python generate_opml.py
+git add sources.yaml sources.opml && git commit -m "curate: YYYY-MM-DD"
+```
+
+When submitting a PR for sources found via the curation agent, note that in your
+PR description — it helps reviewers understand the provenance.
+
 ## License
 
 By contributing, you agree your contributions are licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
