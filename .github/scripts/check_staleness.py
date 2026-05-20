@@ -23,7 +23,7 @@ except ImportError:
     sys.exit(1)
 
 STALE_DAYS = 90
-REPO = os.environ.get("GITHUB_REPOSITORY", "yourusername/ai-signal")
+REPO = os.environ.get("GITHUB_REPOSITORY", "amikumar91/ai-signal")
 TOKEN = os.environ.get("GITHUB_TOKEN", "")
 
 

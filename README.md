@@ -4,7 +4,7 @@
 
 Not a link dump. Not a Twitter list. A community-maintained set of sources with depth ratings, audience tags, and landmark post annotations — built for people who want signal, not noise.
 
-→ **[Browse the site](https://yourusername.github.io/ai-signal)**
+→ **[Browse the site](https://amikumar91.github.io/ai-signal)**
 → **[Download OPML](sources.opml)** — import into Feedly, Reeder, NetNewsWire, Inoreader
 
 ---
