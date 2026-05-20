@@ -1,0 +1,17 @@
+# candidates.yaml — Sources to evaluate during the next /curate run
+#
+# Add any blog or newsletter URL you want Claude to assess.
+# Claude will web-search each candidate for recent activity and evaluate it
+# against the contributing.md criteria before proposing it for sources.yaml.
+#
+# curate.py also pre-fetches RSS for these if you run it before /curate.
+#
+# Remove entries after they have been added to sources.yaml or rejected.
+# Format:
+#
+# candidates:
+#   - name: "Display Name"          # optional — Claude will infer from the site
+#     url: https://example.com
+#     rss: https://example.com/feed # optional — Claude will try to find it
+
+candidates: []

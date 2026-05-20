@@ -270,16 +270,6 @@ sources:
     activity: slow
     last_checked: 2026-05
 
-  - name: "Ahead of AI (Sebastian Raschka newsletter)"
-    url: https://magazine.sebastianraschka.com
-    rss: https://magazine.sebastianraschka.com/feed
-    type: paper-explainer
-    depth: deep
-    audience: [researcher, ml-engineer]
-    tags: [paper-review, weekly, llm-research]
-    activity: active
-    last_checked: 2026-05
-
   - name: "The Batch (deeplearning.ai)"
     url: https://www.deeplearning.ai/the-batch/
     rss: https://www.deeplearning.ai/the-batch/feed/

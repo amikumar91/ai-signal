@@ -94,27 +94,34 @@ Maintenance becomes optional triage rather than active work.
 
 ## Curation
 
-A local curation agent helps discover new sources and surface landmark posts from
-existing ones. It runs entirely within Claude Code — no API key needed.
+Two Claude Code slash commands keep the list fresh. Both use **web search** as the
+primary signal (not RSS, which breaks silently) and edit `sources.yaml` directly.
 
 **Requirements:** Claude Code (Claude Pro), Python 3.11+
 
-```bash
-python -m pip install pyyaml feedparser
-python curate.py          # ~1 min — fetches recent RSS data from all sources
-```
+| Command | What it does |
+|---------|-------------|
+| `/scan-sources` | Checks every source for recent activity via web search. Updates `activity` and `last_checked` in `sources.yaml` directly. |
+| `/curate` | Full pass: activity scan + landmark post detection + new source discovery. Edits `sources.yaml` directly — new entries marked `# PROPOSED`. |
 
-Then open Claude Code in this directory and say: **run curation**
-
-Claude reads the gathered RSS data, searches the web for new source candidates,
-and writes `CURATION_REPORT.md` — a structured checklist of proposals. Review it,
-apply the items you agree with to `sources.yaml`, then:
+**Workflow:**
 
 ```bash
+# Open Claude Code in this directory, then:
+/scan-sources          # quick activity check
+# or
+/curate                # full discovery + curation pass
+
+# Review and commit:
+git diff sources.yaml
 python generate_opml.py
 git add sources.yaml sources.opml
-git commit -m "curate: YYYY-MM-DD curation pass"
+git commit -m "curate: YYYY-MM-DD"
+git push
 ```
+
+To pre-load candidate sources for evaluation, add URLs to `candidates.yaml` before
+running `/curate`. See `SETUP.md` for the full workflow.
 
 See `SETUP.md` for the full curation workflow.
 

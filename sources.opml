@@ -2,7 +2,7 @@
 <opml version="2.0">
   <head>
     <title>AI Signal — Curated AI sources</title>
-    <dateCreated>Wed, 20 May 2026 07:04:25 +0000</dateCreated>
+    <dateCreated>Wed, 20 May 2026 09:32:32 +0000</dateCreated>
     <ownerName>AI Signal</ownerName>
     <ownerEmail>contribute via GitHub PR</ownerEmail>
     <docs>https://github.com/amikumar91/ai-signal</docs>
@@ -35,7 +35,6 @@
     </outline>
     <outline text="Paper Explainers" title="Paper Explainers">
       <outline type="rss" text="The Gradient" title="The Gradient" xmlUrl="https://thegradient.pub/rss/" htmlUrl="https://thegradient.pub" description="[deep] [researcher, ml-engineer] research-commentary, interviews, trends" />
-      <outline type="rss" text="Ahead of AI (Sebastian Raschka newsletter)" title="Ahead of AI (Sebastian Raschka newsletter)" xmlUrl="https://magazine.sebastianraschka.com/feed" htmlUrl="https://magazine.sebastianraschka.com" description="[deep] [researcher, ml-engineer] paper-review, weekly, llm-research" />
       <outline type="rss" text="The Batch (deeplearning.ai)" title="The Batch (deeplearning.ai)" xmlUrl="https://www.deeplearning.ai/the-batch/feed/" htmlUrl="https://www.deeplearning.ai/the-batch/" description="[medium] [ml-engineer, curious] weekly-digest, research-summary, andrew-ng" />
       <outline type="rss" text="Interconnects (Nathan Lambert)" title="Interconnects (Nathan Lambert)" xmlUrl="https://www.interconnects.ai/feed" htmlUrl="https://www.interconnects.ai" description="[deep] [researcher, ml-engineer] rlhf, alignment, policy, open-research" />
       <outline type="rss" text="Transformer Circuits Thread" title="Transformer Circuits Thread" xmlUrl="https://transformer-circuits.pub/rss.xml" htmlUrl="https://transformer-circuits.pub" description="[deep] [researcher] interpretability, mechanistic, circuits, superposition" />

@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
 """
-curate.py — Gather RSS data for the AI Signal curation agent.
+curate.py — Optional RSS pre-fetch for AI Signal curation.
+
+Fetches recent RSS entries for existing sources AND any candidates listed in
+candidates.yaml, writing everything to _curate_context.json.
+
+This is supplementary data — web search (via /curate or /scan-sources) is the
+primary and more reliable signal for source activity.
 
 Usage:
     python -m pip install pyyaml feedparser
     python curate.py
 
-Outputs _curate_context.json (gitignored), then open Claude Code and say:
-    run curation
+Then run /curate or /scan-sources in Claude Code.
 """
 
 import json
@@ -24,6 +29,8 @@ except ImportError:
 
 LOOKBACK_DAYS = 90
 OUTPUT_FILE = Path("_curate_context.json")
+SOURCES_FILE = Path("sources.yaml")
+CANDIDATES_FILE = Path("candidates.yaml")
 
 
 def load_sources(path: Path) -> list[dict]:
@@ -31,7 +38,20 @@ def load_sources(path: Path) -> list[dict]:
         return yaml.safe_load(f)["sources"]
 
 
+def load_candidates(path: Path) -> list[dict]:
+    if not path.exists():
+        return []
+    with path.open() as f:
+        data = yaml.safe_load(f)
+    return data.get("candidates") or []
+
+
 def fetch_recent_entries(rss_url: str, since: datetime) -> list[dict]:
+    """
+    Fetch feed entries published since `since`. Returns [] on any failure —
+    treat an empty result as 'RSS unreliable', not 'source inactive'. Always
+    verify source activity via web search before drawing conclusions.
+    """
     try:
         feed = feedparser.parse(rss_url)
         entries = []
@@ -53,44 +73,59 @@ def fetch_recent_entries(rss_url: str, since: datetime) -> list[dict]:
         return []
 
 
+def process_source(s: dict, since: datetime, label: str) -> dict:
+    rss = s.get("rss")
+    recent = []
+    if rss:
+        recent = fetch_recent_entries(rss, since)
+        status = f"{len(recent)} recent posts" if recent else "0 posts (RSS may be broken — verify via web search)"
+    else:
+        status = "no RSS"
+    print(f"  [{label}] {s.get('name', s.get('url', '?'))} ... {status}")
+    return {
+        "name": s.get("name", ""),
+        "url": s.get("url", ""),
+        "rss": rss or "",
+        "type": s.get("type", ""),
+        "depth": s.get("depth", ""),
+        "audience": s.get("audience", []),
+        "tags": s.get("tags", []),
+        "activity": s.get("activity", ""),
+        "last_checked": s.get("last_checked", ""),
+        "landmark_posts": s.get("landmark_posts", []),
+        "recent_posts": recent,
+        "rss_reliable": bool(recent),
+    }
+
+
 def main():
-    sources = load_sources(Path("sources.yaml"))
     since = datetime.now(timezone.utc) - timedelta(days=LOOKBACK_DAYS)
 
     context = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "lookback_days": LOOKBACK_DAYS,
+        "note": "0 recent_posts means RSS parsing failed or feed is genuinely quiet. Always verify via web search.",
         "sources": [],
+        "candidates": [],
     }
 
-    for s in sources:
-        print(f"Fetching: {s['name']} ...", end=" ", flush=True)
-        rss = s.get("rss")
-        recent = []
-        if rss:
-            recent = fetch_recent_entries(rss, since)
-            print(f"{len(recent)} recent posts")
-        else:
-            print("no RSS")
+    print(f"Fetching existing sources from {SOURCES_FILE}...")
+    for s in load_sources(SOURCES_FILE):
+        context["sources"].append(process_source(s, since, "existing"))
 
-        context["sources"].append({
-            "name": s["name"],
-            "url": s.get("url", ""),
-            "rss": rss or "",
-            "type": s.get("type", ""),
-            "depth": s.get("depth", ""),
-            "audience": s.get("audience", []),
-            "tags": s.get("tags", []),
-            "activity": s.get("activity", ""),
-            "last_checked": s.get("last_checked", ""),
-            "landmark_posts": s.get("landmark_posts", []),
-            "recent_posts": recent,
-        })
+    candidates = load_candidates(CANDIDATES_FILE)
+    if candidates:
+        print(f"\nFetching {len(candidates)} candidate(s) from {CANDIDATES_FILE}...")
+        for c in candidates:
+            context["candidates"].append(process_source(c, since, "candidate"))
+    else:
+        print(f"\nNo candidates.yaml entries found — skipping candidate pre-fetch.")
 
     OUTPUT_FILE.write_text(json.dumps(context, indent=2, ensure_ascii=False), encoding="utf-8")
-    total = len(context["sources"])
-    print(f"\nContext written to {OUTPUT_FILE} ({total} sources)")
-    print("Now open Claude Code in this directory and say: run curation")
+    total_sources = len(context["sources"])
+    total_candidates = len(context["candidates"])
+    print(f"\nWritten to {OUTPUT_FILE} ({total_sources} sources, {total_candidates} candidates)")
+    print("Now run /curate or /scan-sources in Claude Code.")
 
 
 if __name__ == "__main__":

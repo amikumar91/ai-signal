@@ -107,22 +107,24 @@ Open an issue before removing — sometimes someone has context on why a source 
 
 ## Using the curation agent
 
-The curation agent is the recommended way to discover new sources and audit
-existing ones for landmark post candidates.
-
-See `SETUP.md §4` for the full workflow. Short version:
+Two Claude Code slash commands handle discovery and activity checking. Both edit
+`sources.yaml` directly — you review with `git diff`, then commit.
 
 ```bash
-python -m pip install pyyaml feedparser
-python curate.py           # gather RSS data
-# open Claude Code → say: run curation
-# review CURATION_REPORT.md → apply to sources.yaml
+# Open Claude Code in this directory, then:
+/scan-sources    # check all sources for activity changes
+/curate          # full pass: activity + landmark posts + new source discovery
+
+# After the command finishes:
+git diff sources.yaml
 python generate_opml.py
 git add sources.yaml sources.opml && git commit -m "curate: YYYY-MM-DD"
 ```
 
-When submitting a PR for sources found via the curation agent, note that in your
-PR description — it helps reviewers understand the provenance.
+See `SETUP.md §4` for the full workflow including how to queue candidate URLs.
+
+When submitting a PR for sources found via `/curate`, note that in your PR
+description — it helps reviewers understand the provenance.
 
 ## License
 

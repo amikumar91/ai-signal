@@ -86,62 +86,68 @@ python generate_opml.py
 
 ## 4. Running the curation agent
 
-The curation agent discovers new AI sources and surfaces landmark-worthy posts
-from existing ones. Anyone with Claude Code (Claude Pro) can run it.
+Two slash commands handle all curation. Both require Claude Code (Claude Pro) and
+use **web search** as the primary signal — not RSS, which breaks silently.
 
-### Prerequisites
+### Commands
 
-```bash
-python -m pip install pyyaml feedparser
-```
+**`/scan-sources`** — Quick activity check
+
+Opens Claude Code in this directory and runs `/scan-sources`. Claude web-searches
+every source, updates `activity` and `last_checked` in `sources.yaml` in-place, and
+prints a summary of what changed.
+
+**`/curate`** — Full curation pass
+
+Runs `/curate` in Claude Code. Claude:
+1. Checks all existing sources for activity (web search, not RSS)
+2. Identifies landmark-worthy recent posts and adds them to `sources.yaml`
+3. Evaluates any URLs in `candidates.yaml`
+4. Discovers new source candidates via web search
+5. Appends qualifying new sources to `sources.yaml` marked `# PROPOSED`
 
 ### Workflow
 
-**1. Gather RSS data (~1 min)**
-
 ```bash
+# Optional: pre-fetch RSS data (supplementary only — web search is authoritative)
+python -m pip install pyyaml feedparser
 python curate.py
-```
 
-This reads all sources from `sources.yaml`, fetches the last 90 days of posts
-from each RSS feed, and writes `_curate_context.json`. This file is gitignored.
+# Open Claude Code in this directory, then run:
+/curate       # or /scan-sources for a quick activity-only check
 
-**2. Run the curation agent**
+# Review all edits Claude made:
+git diff sources.yaml
 
-Open Claude Code in this directory and say:
-
-> run curation
-
-Claude will:
-- Read the RSS context
-- Identify posts on existing sources that look landmark-worthy
-- Search the web for new AI sources that meet the curation criteria
-- Flag any sources with no recent posts (activity status candidates)
-
-**3. Review `CURATION_REPORT.md`**
-
-Claude writes a structured checklist. Each item is a checkbox. Review the
-proposals and tick the ones you want to apply.
-
-**4. Apply changes and commit**
-
-For each checked item, edit `sources.yaml` directly. Then:
-
-```bash
+# When satisfied:
 python generate_opml.py
 git add sources.yaml sources.opml
-git commit -m "curate: YYYY-MM-DD curation pass"
+git commit -m "curate: YYYY-MM-DD"
 git push
 ```
 
 GitHub Pages redeploys automatically within ~2 minutes.
 
+### Queuing candidate sources
+
+To add a specific URL for evaluation, add it to `candidates.yaml` before running
+`/curate`:
+
+```yaml
+candidates:
+  - name: "Latent Space"
+    url: https://www.latent.space/
+    rss: https://www.latent.space/feed
+```
+
+Claude evaluates it against the `contributing.md` criteria and either adds it to
+`sources.yaml` (marked `# PROPOSED`) or skips it. Clear the entry after evaluation.
+
 ### Frequency
 
-Run the curation agent monthly, or whenever you want to refresh the list.
-The existing staleness workflow (GitHub Actions, every Monday) already handles
-dead feed detection — the curation agent goes deeper: quality, discovery,
-landmark posts.
+Run `/curate` monthly. `/scan-sources` can run any time you suspect activity statuses
+are drifting. The GitHub Actions staleness workflow (every Monday) only checks RSS
+feed liveness — `/scan-sources` goes deeper by verifying the actual website.
 
 ### Troubleshooting
 
@@ -150,9 +156,6 @@ landmark posts.
 python -m pip install pyyaml feedparser
 ```
 
-**Claude says `_curate_context.json` not found**
-Run `python curate.py` first, then ask Claude to run curation again.
-
-**A feed returns 0 recent posts but the source is clearly active**
-Some feeds use non-standard date fields. Claude will flag this in the Notes
-section of the report — verify manually.
+**curate.py shows 0 recent posts for a clearly active source**
+This is an RSS parsing failure, not real inactivity. Ignore it — `/curate` and
+`/scan-sources` use web search and will correctly identify the source as active.
