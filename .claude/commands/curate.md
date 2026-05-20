@@ -8,6 +8,15 @@ All changes go directly into `sources.yaml`. Review with `git diff`, then run
 
 ---
 
+## Coverage target
+
+The goal is **80–100 sources**. If the current count is below 80, discovery (Step 4)
+is the most important step — bias toward proposing more candidates rather than fewer.
+A curated list with 35 sources feels like a personal bookmark folder. One with 90
+feels like a resource the community trusts.
+
+---
+
 ## Vocabulary — use these definitions consistently
 
 ### Source types
@@ -100,7 +109,68 @@ If `candidates.yaml` exists and has entries, evaluate each one using the five-po
 
 ## Step 4 — Discover new sources
 
-This step must find sources NOT currently in `sources.yaml`. Run all of these searches:
+This step must find sources NOT currently in `sources.yaml`. The goal is to propose
+enough candidates to move the list toward 80–100 sources total. Cast a wide net.
+
+### 4a — Check known gaps first
+
+Before running discovery searches, check whether these canonical sources are already
+in `sources.yaml`. For any that are missing, evaluate them and add as candidates:
+
+**Labs and academic:**
+- Google AI Blog (blog.google/technology/ai)
+- Microsoft Research Blog (microsoft.com/en-us/research/blog)
+- BAIR Blog — Berkeley AI Research (bair.berkeley.edu/blog)
+- NVIDIA Developer Blog — AI section (developer.nvidia.com/blog)
+- EleutherAI Blog (blog.eleuther.ai)
+- Apple Machine Learning Research (machinelearning.apple.com)
+- IBM Research Blog — AI (research.ibm.com/blog)
+- Stability AI Blog (stability.ai/blog)
+- xAI Blog (x.ai/blog)
+- Cohere Blog (cohere.com/blog)
+
+**Individual researchers and educators:**
+- fast.ai / Jeremy Howard (fast.ai)
+- Answer.AI (answer.ai) — Jeremy Howard's research lab
+- Yannic Kilcher — if he maintains a written blog alongside YouTube
+- François Chollet — if he has a blog with RSS (primary presence is Twitter/Medium)
+- Dan Hendrycks (hendrycks.com or substack)
+- Robert Miles — AI safety educator
+
+**Infrastructure and systems:**
+- LlamaIndex Blog (llamaindex.ai/blog)
+- Replicate Blog (replicate.com/blog)
+- Ollama Blog (ollama.com/blog)
+- Groq Blog (groq.com/blog)
+- Lightning AI Blog (lightning.ai/blog)
+- BentoML Blog (bentoml.com/blog)
+- Fireworks AI Blog (fireworks.ai/blog)
+- Cerebras Blog (cerebras.net/blog)
+
+**Applied / company engineering blogs:**
+- Roboflow Blog (blog.roboflow.com) — computer vision
+- Scale AI Blog (scale.com/blog)
+- Nomic AI Blog (nomic.ai/blog)
+- Runway Blog (runwayml.com/blog)
+- Pydantic AI Blog / Instructor Blog (jxnl.co)
+- Arize AI Blog (arize.com/blog)
+- Evidently AI Blog (evidentlyai.com/blog)
+
+**Paper explainers and safety:**
+- AI Alignment Forum (alignmentforum.org)
+- LessWrong AI section (lesswrong.com/tag/ai)
+- Papers With Code Blog (paperswithcode.com/blog)
+- ML Research Highlights (ml-research-highlights.com or similar)
+- Ahead of AI — check if not already listed as a named source vs. Sebastian Raschka's main blog
+
+**News and digests:**
+- Ben's Bites (bensbites.com)
+- TLDR AI (tldr.tech/ai)
+- Alpha Signal (alphasignal.ai)
+
+### 4b — Run discovery searches
+
+Run all of these searches to find sources not covered in 4a:
 
 ```
 best AI ML technical blogs 2026 -site:medium.com -site:kdnuggets.com
@@ -112,27 +182,35 @@ AI inference serving systems blog 2026
 AI safety alignment blog active 2026
 LLM fine-tuning quantization blog 2026
 applied AI engineering blog production 2026
+AI company engineering blog 2026
+computer vision ML blog active 2026
+AI evaluation evals blog 2026
 ```
 
 Also consider: authors cited repeatedly in recent landmark posts from existing sources who publish their own blog not yet in the list.
 
-**Explicitly excluded categories** — do not propose these regardless of quality:
-- Paywalled sources (readers must be able to access it freely)
-- Tutorial farms (sites that exist to rank on Google, not share genuine knowledge)
-- Primarily marketing or product announcement blogs
-- Podcast-only sources (no written content, or transcripts only)
-- Generic aggregators with no editorial judgement
-- Sources with no RSS feed (can't be imported into an RSS reader)
-- Dead sources (no posts in 18+ months) unless landmark posts justify archiving
+---
 
-**Five-point check for every candidate:**
+## Five-point check for every candidate
+
 1. Has a working RSS feed URL?
-2. Published at least 3 posts in the last 90 days (or landmark-quality archive)?
+2. Meets the activity threshold — one of:
+   - **For company/org blogs:** at least 3 posts in the last 90 days
+   - **For individual researcher blogs:** at least 3 posts in the last 12 months, OR a landmark-quality archive even if posting slowly (a researcher who posts 6×/year with exceptional depth qualifies; one who posts 6×/year with shallow content does not)
 3. Has a specific editorial POV — not a link dump, not generic?
 4. Not already in `sources.yaml`?
 5. Not paywalled?
 
 Only propose sources that pass all five.
+
+**Explicitly excluded categories** — do not propose these regardless of quality:
+- Paywalled sources (readers must be able to access it freely)
+- Tutorial farms (sites that exist to rank on Google, not share genuine knowledge)
+- Primarily marketing or product announcement blogs
+- Podcast-only sources with **no written content** (audio/video transcript dumps don't count; but a podcast with substantive written show notes or companion posts *does* qualify — evaluate the writing, not the medium)
+- Generic aggregators with no editorial judgement
+- Sources with no RSS feed (can't be imported into an RSS reader)
+- Dead sources (no posts in 18+ months) unless landmark posts justify archiving
 
 ---
 
@@ -178,6 +256,7 @@ Curation complete — YYYY-MM-DD
   Landmark posts added: N (source name + post title)
   New sources proposed: N (list names, marked # PROPOSED)
   Candidates evaluated: N (pass/fail breakdown)
+  Current total: N  (target: 80–100)
 
 Review:  git diff sources.yaml
 Commit:  git add sources.yaml sources.opml && git commit -m "curate: YYYY-MM-DD"

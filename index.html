@@ -548,7 +548,7 @@
         <span class="stat-label">categories</span>
       </div>
       <div class="stat">
-        <span class="stat-num">31</span>
+        <span class="stat-num" id="rss-count">33</span>
         <span class="stat-label">RSS feeds</span>
       </div>
     </div>
@@ -838,6 +838,167 @@ const SOURCES = [
     activity: "active", last_checked: "2026-05",
     landmarks: [{title:"What Are Embeddings", url:"https://vickiboykis.com/what_are_embeddings/", why:"The clearest explanation of what embeddings actually are and how they work — widely cited as the reference introduction for ML engineers"}]
   },
+  {
+    name: "Google AI Blog", url: "https://blog.google/technology/ai/",
+    rss: "https://blog.google/technology/ai/rss/", type: "lab", depth: "medium",
+    audience: ["researcher","ml-engineer","builder"], tags: ["gemini","multimodal","tpu","search","responsible-ai"],
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
+  },
+  {
+    name: "Microsoft Research Blog", url: "https://www.microsoft.com/en-us/research/blog/",
+    rss: "https://www.microsoft.com/en-us/research/feed/", type: "lab", depth: "deep",
+    audience: ["researcher","ml-engineer"], tags: ["phi","azure-ai","reasoning","multimodal","rl"],
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
+  },
+  {
+    name: "BAIR Blog", url: "https://bair.berkeley.edu/blog/",
+    rss: "https://bair.berkeley.edu/blog/feed.xml", type: "lab", depth: "deep",
+    audience: ["researcher","ml-engineer"], tags: ["robotics","rl","computer-vision","nlp","safety","berkeley"],
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
+  },
+  {
+    name: "NVIDIA Technical Blog (AI)", url: "https://developer.nvidia.com/blog/category/artificial-intelligence/",
+    rss: "https://developer.nvidia.com/blog/feed/", type: "lab", depth: "medium",
+    audience: ["ml-engineer"], tags: ["gpu","cuda","inference","training","tensorrt","triton"],
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
+  },
+  {
+    name: "EleutherAI Blog", url: "https://blog.eleuther.ai/",
+    rss: "https://blog.eleuther.ai/rss.xml", type: "lab", depth: "deep",
+    audience: ["researcher","ml-engineer"], tags: ["open-source","gpt-neox","interpretability","evaluation","scaling"],
+    activity: "slow", last_checked: "2026-05",
+    landmarks: [{title:"Pythia: A Suite for Analyzing Large Language Models", url:"https://blog.eleuther.ai/pythia/", why:"The cleanest open controlled-study of how LLM behavior evolves through training — used widely in interpretability research"}]
+  },
+  {
+    name: "Apple Machine Learning Research", url: "https://machinelearning.apple.com",
+    rss: "https://machinelearning.apple.com/rss/news.rss", type: "lab", depth: "deep",
+    audience: ["researcher","ml-engineer"], tags: ["on-device","efficiency","privacy","multimodal","speech"],
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
+  },
+  {
+    name: "fast.ai Blog", url: "https://www.fast.ai/posts/",
+    rss: "https://www.fast.ai/index.xml", type: "individual", depth: "medium",
+    audience: ["ml-engineer","builder"], tags: ["practical-dl","education","fine-tuning","pytorch"],
+    activity: "slow", last_checked: "2026-05",
+    landmarks: [{title:"Practical Deep Learning for Coders (course launch)", url:"https://www.fast.ai/posts/2022-07-21-dl-coders-22.html", why:"The free course that made deep learning accessible to thousands of practitioners without a PhD"}]
+  },
+  {
+    name: "Answer.AI", url: "https://www.answer.ai",
+    rss: "https://www.answer.ai/rss.xml", type: "individual", depth: "medium",
+    audience: ["ml-engineer","builder"], tags: ["practical-ai","efficiency","open-source","fine-tuning"],
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
+  },
+  {
+    name: "Jeremy Howard (substack)", url: "https://jeremy.fast.ai",
+    rss: "https://jeremy.fast.ai/index.xml", type: "individual", depth: "medium",
+    audience: ["ml-engineer","builder"], tags: ["practical-ai","fine-tuning","open-source"],
+    activity: "slow", last_checked: "2026-05",
+    landmarks: []
+  },
+  {
+    name: "Replicate Blog", url: "https://replicate.com/blog",
+    rss: "https://replicate.com/blog/rss.xml", type: "systems", depth: "medium",
+    audience: ["ml-engineer","builder"], tags: ["model-deployment","inference","open-source-models","api"],
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
+  },
+  {
+    name: "Groq Blog", url: "https://groq.com/blog/",
+    rss: "https://groq.com/blog/rss.xml", type: "systems", depth: "medium",
+    audience: ["ml-engineer","builder"], tags: ["inference","lpu","throughput","hardware"],
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
+  },
+  {
+    name: "Ollama Blog", url: "https://ollama.com/blog",
+    rss: "https://ollama.com/blog/rss", type: "systems", depth: "medium",
+    audience: ["builder","ml-engineer"], tags: ["local-llm","inference","open-source","self-hosted"],
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
+  },
+  {
+    name: "Lightning AI Blog", url: "https://lightning.ai/blog",
+    rss: "https://lightning.ai/blog/rss.xml", type: "systems", depth: "medium",
+    audience: ["ml-engineer","builder"], tags: ["pytorch-lightning","training","mlops","cloud-gpu"],
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
+  },
+  {
+    name: "LlamaIndex Blog", url: "https://www.llamaindex.ai/blog",
+    rss: "https://www.llamaindex.ai/blog/rss.xml", type: "systems", depth: "medium",
+    audience: ["builder"], tags: ["rag","agents","indexing","llm-orchestration"],
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
+  },
+  {
+    name: "Roboflow Blog", url: "https://blog.roboflow.com",
+    rss: "https://blog.roboflow.com/rss/", type: "applied", depth: "medium",
+    audience: ["ml-engineer","builder"], tags: ["computer-vision","object-detection","datasets","annotation","yolo"],
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
+  },
+  {
+    name: "Scale AI Blog", url: "https://scale.com/blog",
+    rss: "https://scale.com/blog/rss.xml", type: "applied", depth: "medium",
+    audience: ["ml-engineer","builder"], tags: ["data","annotation","evals","fine-tuning","rlhf"],
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
+  },
+  {
+    name: "Runway Blog", url: "https://runwayml.com/blog",
+    rss: "https://runwayml.com/blog/rss.xml", type: "applied", depth: "shallow",
+    audience: ["builder","curious"], tags: ["generative-video","creative-ai","multimodal","research"],
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
+  },
+  {
+    name: "Arize AI Blog", url: "https://arize.com/blog/",
+    rss: "https://arize.com/blog/rss.xml", type: "applied", depth: "medium",
+    audience: ["ml-engineer","builder"], tags: ["observability","monitoring","evals","production","llm-tracing"],
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
+  },
+  {
+    name: "Evidently AI Blog", url: "https://www.evidentlyai.com/blog",
+    rss: "https://www.evidentlyai.com/blog/rss.xml", type: "applied", depth: "medium",
+    audience: ["ml-engineer","builder"], tags: ["ml-monitoring","drift","data-quality","evals","production"],
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
+  },
+  {
+    name: "AI Alignment Forum", url: "https://www.alignmentforum.org",
+    rss: "https://www.alignmentforum.org/feed.xml", type: "paper-explainer", depth: "deep",
+    audience: ["researcher","ml-engineer"], tags: ["alignment","safety","interpretability","agent-foundations","risk"],
+    activity: "active", last_checked: "2026-05",
+    landmarks: [{title:"Concrete Problems in AI Safety", url:"https://www.alignmentforum.org/posts/AWoZBzxdm6K3oimoM/concrete-problems-in-ai-safety", why:"The paper that gave the field a shared vocabulary for AI safety failure modes — still the entry point for researchers"}]
+  },
+  {
+    name: "Papers With Code Blog", url: "https://paperswithcode.com/blog",
+    rss: "https://paperswithcode.com/blog/feed/", type: "paper-explainer", depth: "medium",
+    audience: ["researcher","ml-engineer"], tags: ["benchmarks","sota","reproducibility","open-science"],
+    activity: "slow", last_checked: "2026-05",
+    landmarks: []
+  },
+  {
+    name: "Ben's Bites", url: "https://www.bensbites.com",
+    rss: "https://bensbites.beehiiv.com/feed", type: "news", depth: "shallow",
+    audience: ["builder","curious"], tags: ["daily-digest","product-news","startup","tools"],
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
+  },
+  {
+    name: "TLDR AI", url: "https://tldr.tech/ai",
+    rss: "https://tldr.tech/ai/rss", type: "news", depth: "shallow",
+    audience: ["builder","curious"], tags: ["daily-digest","research-news","product-launches"],
+    activity: "active", last_checked: "2026-05",
+    landmarks: []
+  },
 ];
 
 // ── Config ──────────────────────────────────────────────────────────────────
@@ -954,6 +1115,7 @@ document.getElementById('filters').addEventListener('click', function(e) {
 
 // ── Init ────────────────────────────────────────────────────────────────────
 document.getElementById('total-count').textContent = SOURCES.length;
+document.getElementById('rss-count').textContent = SOURCES.filter(s => s.rss).length;
 document.getElementById('landmark-count').textContent = SOURCES.reduce((n, s) => n + (s.landmarks ? s.landmarks.length : 0), 0);
 renderAll();
 </script>

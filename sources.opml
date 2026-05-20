@@ -2,7 +2,7 @@
 <opml version="2.0">
   <head>
     <title>AI Signal — Curated AI sources</title>
-    <dateCreated>Wed, 20 May 2026 10:00:48 +0000</dateCreated>
+    <dateCreated>Wed, 20 May 2026 10:35:45 +0000</dateCreated>
     <ownerName>AI Signal</ownerName>
     <ownerEmail>contribute via GitHub PR</ownerEmail>
     <docs>https://github.com/amikumar91/ai-signal</docs>
@@ -16,6 +16,12 @@
       <outline type="rss" text="Mistral AI Blog" title="Mistral AI Blog" xmlUrl="https://mistral.ai/rss" htmlUrl="https://mistral.ai/news/" description="[medium] [ml-engineer, builder] open-source, efficiency, european-ai, mixtral" />
       <outline type="rss" text="Cohere for AI" title="Cohere for AI" xmlUrl="https://txt.cohere.com/rss/" htmlUrl="https://cohere.com/research" description="[deep] [researcher, ml-engineer] rag, embeddings, enterprise, multilingual" />
       <outline type="rss" text="AI2 Blog (Allen Institute)" title="AI2 Blog (Allen Institute)" xmlUrl="https://allenai.org/blog/rss" htmlUrl="https://allenai.org/blog" description="[deep] [researcher, ml-engineer] open-source, reasoning, science, olmo" />
+      <outline type="rss" text="Google AI Blog" title="Google AI Blog" xmlUrl="https://blog.google/technology/ai/rss/" htmlUrl="https://blog.google/technology/ai/" description="[medium] [researcher, ml-engineer, builder] gemini, multimodal, tpu, search, responsible-ai" />
+      <outline type="rss" text="Microsoft Research Blog" title="Microsoft Research Blog" xmlUrl="https://www.microsoft.com/en-us/research/feed/" htmlUrl="https://www.microsoft.com/en-us/research/blog/" description="[deep] [researcher, ml-engineer] phi, azure-ai, reasoning, multimodal, rl" />
+      <outline type="rss" text="BAIR Blog" title="BAIR Blog" xmlUrl="https://bair.berkeley.edu/blog/feed.xml" htmlUrl="https://bair.berkeley.edu/blog/" description="[deep] [researcher, ml-engineer] robotics, rl, computer-vision, nlp, safety, berkeley" />
+      <outline type="rss" text="NVIDIA Technical Blog (AI)" title="NVIDIA Technical Blog (AI)" xmlUrl="https://developer.nvidia.com/blog/feed/" htmlUrl="https://developer.nvidia.com/blog/category/artificial-intelligence/" description="[medium] [ml-engineer] gpu, cuda, inference, training, tensorrt, triton" />
+      <outline type="rss" text="EleutherAI Blog" title="EleutherAI Blog" xmlUrl="https://blog.eleuther.ai/rss.xml" htmlUrl="https://blog.eleuther.ai/" description="[deep] [researcher, ml-engineer] open-source, gpt-neox, interpretability, evaluation, scaling" />
+      <outline type="rss" text="Apple Machine Learning Research" title="Apple Machine Learning Research" xmlUrl="https://machinelearning.apple.com/rss/news.rss" htmlUrl="https://machinelearning.apple.com" description="[deep] [researcher, ml-engineer] on-device, efficiency, privacy, multimodal, speech" />
     </outline>
     <outline text="Individuals" title="Individuals">
       <outline type="rss" text="Gwern Branwen" title="Gwern Branwen" xmlUrl="https://gwern.substack.com/feed" htmlUrl="https://gwern.net" description="[deep] [researcher, curious] ai-scaling, forecasting, statistics, long-form, neural-scaling-laws" />
@@ -28,12 +34,20 @@
       <outline type="rss" text="Hamel Husain" title="Hamel Husain" xmlUrl="https://hamel.dev/feed.xml" htmlUrl="https://hamel.dev" description="[deep] [ml-engineer, builder] evals, fine-tuning, practical, production" />
       <outline type="rss" text="Chip Huyen" title="Chip Huyen" xmlUrl="https://huyenchip.com/feed.xml" htmlUrl="https://huyenchip.com" description="[deep] [ml-engineer, builder] mlops, production, inference, real-time-ml" />
       <outline type="rss" text="Vicki Boykis" title="Vicki Boykis" xmlUrl="https://vickiboykis.com/index.xml" htmlUrl="https://vickiboykis.com" description="[medium] [ml-engineer] embeddings, recsys, ml-infrastructure, engineering" />
+      <outline type="rss" text="fast.ai Blog" title="fast.ai Blog" xmlUrl="https://www.fast.ai/index.xml" htmlUrl="https://www.fast.ai/posts/" description="[medium] [ml-engineer, builder] practical-dl, education, fine-tuning, pytorch" />
+      <outline type="rss" text="Answer.AI" title="Answer.AI" xmlUrl="https://www.answer.ai/rss.xml" htmlUrl="https://www.answer.ai" description="[medium] [ml-engineer, builder] practical-ai, efficiency, open-source, fine-tuning" />
+      <outline type="rss" text="Jeremy Howard (substack)" title="Jeremy Howard (substack)" xmlUrl="https://jeremy.fast.ai/index.xml" htmlUrl="https://jeremy.fast.ai" description="[medium] [ml-engineer, builder] practical-ai, fine-tuning, open-source" />
     </outline>
     <outline text="Systems &amp; Infrastructure" title="Systems &amp; Infrastructure">
       <outline type="rss" text="vLLM Blog" title="vLLM Blog" xmlUrl="https://blog.vllm.ai/feed.xml" htmlUrl="https://blog.vllm.ai" description="[deep] [ml-engineer] inference, serving, kv-cache, throughput, gpu" />
       <outline type="rss" text="Modal Blog" title="Modal Blog" xmlUrl="https://modal.com/blog/rss.xml" htmlUrl="https://modal.com/blog" description="[medium] [ml-engineer, builder] inference, serverless, gpu, deployment" />
       <outline type="rss" text="Together AI Blog" title="Together AI Blog" xmlUrl="https://www.together.ai/blog/rss.xml" htmlUrl="https://www.together.ai/blog" description="[deep] [ml-engineer] inference, fine-tuning, speculative-decoding, open-source" />
       <outline type="rss" text="Anyscale Blog" title="Anyscale Blog" xmlUrl="https://www.anyscale.com/blog/rss.xml" htmlUrl="https://www.anyscale.com/blog" description="[medium] [ml-engineer, builder] ray, distributed, inference, serving" />
+      <outline type="rss" text="Replicate Blog" title="Replicate Blog" xmlUrl="https://replicate.com/blog/rss.xml" htmlUrl="https://replicate.com/blog" description="[medium] [ml-engineer, builder] model-deployment, inference, open-source-models, api" />
+      <outline type="rss" text="Groq Blog" title="Groq Blog" xmlUrl="https://groq.com/blog/rss.xml" htmlUrl="https://groq.com/blog/" description="[medium] [ml-engineer, builder] inference, lpu, throughput, hardware" />
+      <outline type="rss" text="Ollama Blog" title="Ollama Blog" xmlUrl="https://ollama.com/blog/rss" htmlUrl="https://ollama.com/blog" description="[medium] [builder, ml-engineer] local-llm, inference, open-source, self-hosted" />
+      <outline type="rss" text="Lightning AI Blog" title="Lightning AI Blog" xmlUrl="https://lightning.ai/blog/rss.xml" htmlUrl="https://lightning.ai/blog" description="[medium] [ml-engineer, builder] pytorch-lightning, training, mlops, cloud-gpu" />
+      <outline type="rss" text="LlamaIndex Blog" title="LlamaIndex Blog" xmlUrl="https://www.llamaindex.ai/blog/rss.xml" htmlUrl="https://www.llamaindex.ai/blog" description="[medium] [builder] rag, agents, indexing, llm-orchestration" />
     </outline>
     <outline text="Paper Explainers" title="Paper Explainers">
       <outline type="rss" text="The Gradient" title="The Gradient" xmlUrl="https://thegradient.pub/rss/" htmlUrl="https://thegradient.pub" description="[deep] [researcher, ml-engineer] research-commentary, interviews, trends" />
@@ -41,6 +55,8 @@
       <outline type="rss" text="Interconnects (Nathan Lambert)" title="Interconnects (Nathan Lambert)" xmlUrl="https://www.interconnects.ai/feed" htmlUrl="https://www.interconnects.ai" description="[deep] [researcher, ml-engineer] rlhf, alignment, policy, open-research" />
       <outline type="rss" text="Transformer Circuits Thread" title="Transformer Circuits Thread" xmlUrl="https://transformer-circuits.pub/rss.xml" htmlUrl="https://transformer-circuits.pub" description="[deep] [researcher] interpretability, mechanistic, circuits, superposition" />
       <outline type="rss" text="Latent Space" title="Latent Space" xmlUrl="https://www.latent.space/feed" htmlUrl="https://www.latent.space" description="[medium] [ml-engineer, builder] ai-engineering, papers, agents, tooling, weekly" />
+      <outline type="rss" text="AI Alignment Forum" title="AI Alignment Forum" xmlUrl="https://www.alignmentforum.org/feed.xml" htmlUrl="https://www.alignmentforum.org" description="[deep] [researcher, ml-engineer] alignment, safety, interpretability, agent-foundations, risk" />
+      <outline type="rss" text="Papers With Code Blog" title="Papers With Code Blog" xmlUrl="https://paperswithcode.com/blog/feed/" htmlUrl="https://paperswithcode.com/blog" description="[medium] [researcher, ml-engineer] benchmarks, sota, reproducibility, open-science" />
     </outline>
     <outline text="Applied / Company Blogs" title="Applied / Company Blogs">
       <outline type="rss" text="Hugging Face Blog" title="Hugging Face Blog" xmlUrl="https://huggingface.co/blog/feed.xml" htmlUrl="https://huggingface.co/blog" description="[medium] [ml-engineer, builder] open-source, fine-tuning, datasets, transformers-lib" />
@@ -48,10 +64,17 @@
       <outline type="rss" text="LangChain Blog" title="LangChain Blog" xmlUrl="https://blog.langchain.dev/rss/" htmlUrl="https://blog.langchain.dev" description="[medium] [builder] agents, rag, tooling, orchestration" />
       <outline type="rss" text="Braintrust Blog" title="Braintrust Blog" xmlUrl="https://www.braintrust.dev/blog/rss.xml" htmlUrl="https://www.braintrust.dev/blog" description="[medium] [builder, ml-engineer] evals, production, benchmarking" />
       <outline type="rss" text="Honeycomb Blog" title="Honeycomb Blog" xmlUrl="https://www.honeycomb.io/blog/rss.xml" htmlUrl="https://www.honeycomb.io/blog" description="[medium] [builder, ml-engineer] observability, production, llm-in-prod" />
+      <outline type="rss" text="Roboflow Blog" title="Roboflow Blog" xmlUrl="https://blog.roboflow.com/rss/" htmlUrl="https://blog.roboflow.com" description="[medium] [ml-engineer, builder] computer-vision, object-detection, datasets, annotation, yolo" />
+      <outline type="rss" text="Scale AI Blog" title="Scale AI Blog" xmlUrl="https://scale.com/blog/rss.xml" htmlUrl="https://scale.com/blog" description="[medium] [ml-engineer, builder] data, annotation, evals, fine-tuning, rlhf" />
+      <outline type="rss" text="Runway Blog" title="Runway Blog" xmlUrl="https://runwayml.com/blog/rss.xml" htmlUrl="https://runwayml.com/blog" description="[shallow] [builder, curious] generative-video, creative-ai, multimodal, research" />
+      <outline type="rss" text="Arize AI Blog" title="Arize AI Blog" xmlUrl="https://arize.com/blog/rss.xml" htmlUrl="https://arize.com/blog/" description="[medium] [ml-engineer, builder] observability, monitoring, evals, production, llm-tracing" />
+      <outline type="rss" text="Evidently AI Blog" title="Evidently AI Blog" xmlUrl="https://www.evidentlyai.com/blog/rss.xml" htmlUrl="https://www.evidentlyai.com/blog" description="[medium] [ml-engineer, builder] ml-monitoring, drift, data-quality, evals, production" />
     </outline>
     <outline text="News &amp; Digests" title="News &amp; Digests">
       <outline type="rss" text="Import AI (Jack Clark)" title="Import AI (Jack Clark)" xmlUrl="https://importai.substack.com/feed" htmlUrl="https://importai.substack.com" description="[medium] [researcher, curious] weekly, policy, research-digest, geopolitics" />
       <outline type="rss" text="Last Week in AI" title="Last Week in AI" xmlUrl="https://lastweekin.ai/feed" htmlUrl="https://lastweekin.ai" description="[shallow] [curious, builder] weekly-digest, news, broad-coverage" />
+      <outline type="rss" text="Ben's Bites" title="Ben's Bites" xmlUrl="https://bensbites.beehiiv.com/feed" htmlUrl="https://www.bensbites.com" description="[shallow] [builder, curious] daily-digest, product-news, startup, tools" />
+      <outline type="rss" text="TLDR AI" title="TLDR AI" xmlUrl="https://tldr.tech/ai/rss" htmlUrl="https://tldr.tech/ai" description="[shallow] [builder, curious] daily-digest, research-news, product-launches" />
     </outline>
   </body>
 </opml>
