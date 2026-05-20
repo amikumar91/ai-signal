@@ -50,7 +50,7 @@ def build_opml(sources: list[dict]) -> Element:
     )
     SubElement(head, "ownerName").text = "AI Signal"
     SubElement(head, "ownerEmail").text = "contribute via GitHub PR"
-    SubElement(head, "docs").text = "https://github.com/yourusername/ai-signal"
+    SubElement(head, "docs").text = "https://github.com/amikumar91/ai-signal"
 
     body = SubElement(root, "body")
 
