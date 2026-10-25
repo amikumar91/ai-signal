@@ -2,13 +2,13 @@
 """
 check_staleness.py
 Checks each RSS feed in sources.yaml for recent activity.
-Sources with no posts in STALE_DAYS days are flagged.
-Opens a GitHub issue summarising all stale sources.
+Sources with no posts within their activity threshold are flagged.
+Keeps a single rolling GitHub issue (label: staleness) up to date:
+edits the open one, closes duplicates, and closes it once everything is fresh.
 
 Runs in GitHub Actions; needs GITHUB_TOKEN env var.
 """
 
-import json
 import os
 import sys
 from datetime import datetime, timezone, timedelta
@@ -22,103 +22,211 @@ except ImportError:
     print("Missing deps. Run: pip install pyyaml feedparser requests")
     sys.exit(1)
 
-STALE_DAYS = 90
+# Days without a post before a source is flagged, by its declared activity.
+THRESHOLDS = {
+    "active": 90,
+    "slow": 548,  # ~18 months — past this it should be archived
+}
+LABEL = "staleness"
 REPO = os.environ.get("GITHUB_REPOSITORY", "amikumar91/ai-signal")
 TOKEN = os.environ.get("GITHUB_TOKEN", "")
+API = "https://api.github.com"
+USER_AGENT = (
+    "Mozilla/5.0 (compatible; ai-signal-staleness/2.0; "
+    "+https://github.com/amikumar91/ai-signal)"
+)
+TIMEOUT = 20
+
+# Feed check outcomes
+OK = "ok"
+NOT_FOUND = "not_found"   # 404/410 — the rss URL in sources.yaml is wrong
+BLOCKED = "blocked"       # 401/403/429 — the site refuses bots; can't verify
+BROKEN = "broken"         # network error, other HTTP error, or not a feed
 
 
 def load_sources(path: Path):
-    with path.open() as f:
+    with path.open(encoding="utf-8") as f:
         return yaml.safe_load(f)["sources"]
 
 
-def latest_post_date(rss_url: str) -> datetime | None:
-    """Return the datetime of the most recent feed entry, or None on failure."""
-    try:
-        feed = feedparser.parse(rss_url)
-        if not feed.entries:
-            return None
-        entry = feed.entries[0]
-        for field in ("published_parsed", "updated_parsed"):
-            t = getattr(entry, field, None)
-            if t:
-                return datetime(*t[:6], tzinfo=timezone.utc)
-    except Exception:
-        pass
+def _entry_date(entry) -> datetime | None:
+    for field in ("published_parsed", "updated_parsed"):
+        t = entry.get(field)
+        if t:
+            return datetime(*t[:6], tzinfo=timezone.utc)
     return None
 
 
-def open_github_issue(title: str, body: str):
-    if not TOKEN:
-        print("No GITHUB_TOKEN — skipping issue creation")
-        print(f"\nWould have opened issue: {title}\n{body}")
-        return
-    resp = requests.post(
-        f"https://api.github.com/repos/{REPO}/issues",
-        headers={"Authorization": f"token {TOKEN}", "Accept": "application/vnd.github+json"},
-        json={"title": title, "body": body, "labels": ["staleness"]},
+def check_feed(rss_url: str) -> tuple[str, datetime | None, str]:
+    """Return (status, latest post datetime, detail) for a feed URL."""
+    try:
+        resp = requests.get(
+            rss_url,
+            headers={"User-Agent": USER_AGENT, "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml, */*"},
+            timeout=TIMEOUT,
+        )
+    except requests.RequestException as e:
+        return BROKEN, None, type(e).__name__
+
+    if resp.status_code in (404, 410):
+        return NOT_FOUND, None, f"HTTP {resp.status_code}"
+    if resp.status_code in (401, 403, 429):
+        return BLOCKED, None, f"HTTP {resp.status_code}"
+    if resp.status_code >= 400:
+        return BROKEN, None, f"HTTP {resp.status_code}"
+
+    feed = feedparser.parse(resp.content)
+    if not feed.entries:
+        return BROKEN, None, "no feed entries (not a feed?)"
+
+    # Feeds aren't always newest-first, so take the max.
+    dates = [d for d in (_entry_date(e) for e in feed.entries) if d]
+    if not dates:
+        return BROKEN, None, "entries have no dates"
+    return OK, max(dates), ""
+
+
+def build_report(stale, not_found, blocked, broken, now) -> tuple[str, str]:
+    lines = [f"# Staleness report — updated {now.strftime('%Y-%m-%d')}\n"]
+    lines.append(
+        f"Thresholds: `active` sources are flagged after **{THRESHOLDS['active']} days** "
+        f"without a post, `slow` sources after **{THRESHOLDS['slow']} days** (~18 months). "
+        "`archived` sources are not checked.\n"
     )
-    if resp.ok:
-        print(f"Opened issue: {resp.json()['html_url']}")
+    lines.append(
+        "To resolve: update `activity` / `rss` / `last_checked` in `sources.yaml`, "
+        "run `python generate_opml.py`, and commit. This issue is updated in place each week "
+        "and closes itself once everything is fresh.\n"
+    )
+
+    if stale:
+        lines.append("## Stale sources\n")
+        lines.append("| Source | Activity | Last post | Days since | Suggested |")
+        lines.append("|--------|----------|-----------|------------|-----------|")
+        for s, latest, days in sorted(stale, key=lambda x: x[2], reverse=True):
+            suggested = "archived" if days > THRESHOLDS["slow"] else "slow"
+            lines.append(
+                f"| [{s['name']}]({s.get('url', '')}) | {s.get('activity')} | "
+                f"{latest.strftime('%Y-%m-%d')} | {days}d | `{suggested}` |"
+            )
+
+    if not_found:
+        lines.append("\n## Feed not found (fix the `rss` URL)\n")
+        for s, detail in not_found:
+            lines.append(f"- [{s['name']}]({s.get('url', '')}) — `{s['rss']}` ({detail})")
+
+    if broken:
+        lines.append("\n## Feed errors\n")
+        for s, detail in broken:
+            lines.append(f"- [{s['name']}]({s.get('url', '')}) — `{s['rss']}` ({detail})")
+
+    if blocked:
+        lines.append("\n## Could not verify (site blocks automated requests)\n")
+        lines.append("These feeds may work fine in a reader; check activity manually or via `/scan-sources`.\n")
+        for s, detail in blocked:
+            lines.append(f"- [{s['name']}]({s.get('url', '')}) — `{s['rss']}` ({detail})")
+
+    lines.append("\n---\n*Generated by the weekly staleness check.*")
+
+    errors = len(not_found) + len(broken)
+    title = f"Staleness check: {len(stale)} stale, {errors} feed errors"
+    return title, "\n".join(lines)
+
+
+# ── GitHub issue management ───────────────────────────────────────────────────
+
+def _gh(method: str, path: str, **kwargs):
+    resp = requests.request(
+        method,
+        f"{API}/repos/{REPO}{path}",
+        headers={"Authorization": f"Bearer {TOKEN}", "Accept": "application/vnd.github+json"},
+        timeout=TIMEOUT,
+        **kwargs,
+    )
+    resp.raise_for_status()
+    return resp.json()
+
+
+def open_staleness_issues() -> list[dict]:
+    """Open issues with the staleness label, newest first (excludes PRs)."""
+    issues = _gh("GET", "/issues", params={
+        "state": "open", "labels": LABEL, "sort": "created", "direction": "desc", "per_page": 100,
+    })
+    return [i for i in issues if "pull_request" not in i]
+
+
+def close_issue(number: int, comment: str):
+    _gh("POST", f"/issues/{number}/comments", json={"body": comment})
+    _gh("PATCH", f"/issues/{number}", json={"state": "closed", "state_reason": "completed"})
+
+
+def sync_issue(title: str | None, body: str | None):
+    """Create/update the rolling issue, or close it when title is None."""
+    if not TOKEN:
+        print("No GITHUB_TOKEN — skipping issue sync")
+        if title:
+            print(f"\nWould have synced issue: {title}\n{body}")
+        return
+
+    existing = open_staleness_issues()
+
+    if title is None:
+        for issue in existing:
+            close_issue(issue["number"], "All sources are fresh — closing.")
+            print(f"Closed issue #{issue['number']}")
+        return
+
+    if existing:
+        current, duplicates = existing[0], existing[1:]
+        _gh("PATCH", f"/issues/{current['number']}", json={"title": title, "body": body})
+        print(f"Updated issue: {current['html_url']}")
     else:
-        print(f"Failed to open issue: {resp.status_code} {resp.text}", file=sys.stderr)
+        current, duplicates = _gh("POST", "/issues", json={"title": title, "body": body, "labels": [LABEL]}), []
+        print(f"Opened issue: {current['html_url']}")
+
+    for issue in duplicates:
+        close_issue(issue["number"], f"Superseded by #{current['number']}, which is now updated weekly.")
+        print(f"Closed duplicate #{issue['number']}")
 
 
 def main():
     sources = load_sources(Path("sources.yaml"))
     now = datetime.now(timezone.utc)
-    cutoff = now - timedelta(days=STALE_DAYS)
 
-    stale = []
-    error = []
+    stale, not_found, blocked, broken = [], [], [], []
 
     for s in sources:
         rss = s.get("rss")
-        if not rss or s.get("activity") == "archived":
+        threshold = THRESHOLDS.get(s.get("activity"))
+        if not rss or threshold is None:
             continue
 
         print(f"Checking: {s['name']} ...", end=" ", flush=True)
-        latest = latest_post_date(rss)
+        status, latest, detail = check_feed(rss)
 
-        if latest is None:
-            error.append(s)
-            print("⚠ could not fetch")
-        elif latest < cutoff:
-            days_ago = (now - latest).days
-            s["_days_since"] = days_ago
-            s["_latest"] = latest.strftime("%Y-%m-%d")
-            stale.append(s)
-            print(f"⚠ stale ({days_ago}d ago)")
+        if status == NOT_FOUND:
+            not_found.append((s, detail))
+            print(f"✗ not found ({detail})")
+        elif status == BLOCKED:
+            blocked.append((s, detail))
+            print(f"? blocked ({detail})")
+        elif status == BROKEN:
+            broken.append((s, detail))
+            print(f"✗ error ({detail})")
+        elif latest < now - timedelta(days=threshold):
+            days = (now - latest).days
+            stale.append((s, latest, days))
+            print(f"⚠ stale ({days}d ago)")
         else:
             print(f"✓ ({latest.strftime('%Y-%m-%d')})")
 
-    if not stale and not error:
+    if not stale and not not_found and not broken:
         print("\nAll sources are fresh 🎉")
+        sync_issue(None, None)
         return
 
-    # Build issue body
-    lines = [f"# Staleness report — {now.strftime('%Y-%m-%d')}\n"]
-    lines.append(f"Sources with no posts in the last **{STALE_DAYS} days** need review.")
-    lines.append("Please check each source and either:\n- Update `activity: slow` or `activity: archived` in `sources.yaml`\n- Or confirm it's still worth keeping.\n")
-
-    if stale:
-        lines.append("## Stale sources\n")
-        lines.append("| Source | Last post | Days since | Action |")
-        lines.append("|--------|-----------|------------|--------|")
-        for s in sorted(stale, key=lambda x: x["_days_since"], reverse=True):
-            url = s.get("url", "")
-            lines.append(f"| [{s['name']}]({url}) | {s['_latest']} | {s['_days_since']}d | [ ] confirm/archive |")
-
-    if error:
-        lines.append("\n## Feed errors (could not fetch)\n")
-        for s in error:
-            lines.append(f"- [{s['name']}]({s.get('url','')}) — RSS: `{s.get('rss','')}`")
-
-    lines.append(f"\n---\n*Generated by the weekly staleness check. Edit `sources.yaml` and close this issue when resolved.*")
-
-    body = "\n".join(lines)
-    title = f"Staleness check: {len(stale)} stale, {len(error)} feed errors ({now.strftime('%Y-%m-%d')})"
-    open_github_issue(title, body)
+    title, body = build_report(stale, not_found, blocked, broken, now)
+    sync_issue(title, body)
 
 
 if __name__ == "__main__":

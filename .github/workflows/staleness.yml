@@ -10,7 +10,7 @@ jobs:
   check-staleness:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
       issues: write
 
     steps:
@@ -28,14 +28,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-
-      - name: Regenerate OPML
-        run: pip install pyyaml && python generate_opml.py
-
-      - name: Commit updated OPML if changed
-        run: |
-          git config user.name "ai-signal-bot"
-          git config user.email "bot@ai-signal"
-          git add sources.opml
-          git diff --staged --quiet || git commit -m "chore: regenerate OPML [skip ci]"
-          git push || true

@@ -19,13 +19,13 @@ sources:
 
   - name: "Anthropic Research"
     url: https://www.anthropic.com/research
-    rss: https://www.anthropic.com/rss.xml
+    rss:              # no working official feed (checked 2026-10)
     type: lab
     depth: deep
     audience: [researcher, ml-engineer]
     tags: [safety, alignment, interpretability, Claude, RLHF]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
     landmark_posts:
       - title: "Scaling Monosemanticity"
         url: https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html
@@ -33,13 +33,13 @@ sources:
 
   - name: "OpenAI Research"
     url: https://openai.com/research
-    rss: https://openai.com/blog/rss/
+    rss: https://openai.com/news/rss.xml
     type: lab
     depth: deep
     audience: [researcher, ml-engineer]
     tags: [gpt, rlhf, safety, alignment, reasoning]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "DeepMind Blog"
     url: https://deepmind.google/discover/blog/
@@ -49,7 +49,7 @@ sources:
     audience: [researcher, ml-engineer]
     tags: [gemini, alphafold, rl, reasoning, science]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
     landmark_posts:
       - title: "AlphaFold 3"
         url: https://blog.google/technology/ai/google-deepmind-isomorphic-alphafold-3-ai-model/
@@ -57,55 +57,55 @@ sources:
 
   - name: "Meta AI Research"
     url: https://ai.meta.com/research/
-    rss: https://ai.meta.com/blog/rss/
+    rss:              # no working official feed (checked 2026-10)
     type: lab
     depth: deep
     audience: [researcher, ml-engineer]
     tags: [llama, open-source, vision, audio, multimodal]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "Mistral AI Blog"
     url: https://mistral.ai/news/
-    rss: https://mistral.ai/rss
+    rss: https://mistral.ai/news/rss
     type: lab
     depth: medium
     audience: [ml-engineer, builder]
     tags: [open-source, efficiency, european-ai, mixtral]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "Cohere for AI"
     url: https://cohere.com/research
-    rss: https://txt.cohere.com/rss/
+    rss:              # no working official feed (checked 2026-10)
     type: lab
     depth: deep
     audience: [researcher, ml-engineer]
     tags: [rag, embeddings, enterprise, multilingual]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "AI2 Blog (Allen Institute)"
     url: https://allenai.org/blog
-    rss: https://allenai.org/blog/rss
+    rss: https://allenai.org/rss.xml
     type: lab
     depth: deep
     audience: [researcher, ml-engineer]
     tags: [open-source, reasoning, science, olmo]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   # ── Individuals ───────────────────────────────────────────────────────────
 
   - name: "Gwern Branwen"
     url: https://gwern.net
-    rss: https://gwern.substack.com/feed
+    rss:              # no working official feed (checked 2026-10)
     type: individual
     depth: deep
     audience: [researcher, curious]
     tags: [ai-scaling, forecasting, statistics, long-form, neural-scaling-laws]
-    activity: slow
-    last_checked: 2026-05
+    activity: active
+    last_checked: 2026-10
     landmark_posts:
       - title: "The Scaling Hypothesis"
         url: https://gwern.net/scaling-hypothesis
@@ -119,7 +119,7 @@ sources:
     audience: [researcher, ml-engineer]
     tags: [transformers, rl, diffusion, survey, agents]
     activity: slow
-    last_checked: 2026-05
+    last_checked: 2026-10
     landmark_posts:
       - title: "Extrinsic Hallucinations in LLMs"
         url: https://lilianweng.github.io/posts/2024-07-07-hallucination/
@@ -130,13 +130,13 @@ sources:
 
   - name: "Andrej Karpathy"
     url: https://karpathy.ai
-    rss: https://karpathy.github.io/feed.xml
+    rss: https://karpathy.bearblog.dev/feed/
     type: individual
     depth: deep
     audience: [researcher, ml-engineer, builder]
     tags: [llm-fundamentals, neural-networks, video, education]
-    activity: active
-    last_checked: 2026-05
+    activity: slow
+    last_checked: 2026-10
     landmark_posts:
       - title: "The Unreasonable Effectiveness of Recurrent Neural Networks"
         url: http://karpathy.github.io/2015/05/21/rnn-effectiveness/
@@ -150,7 +150,7 @@ sources:
     audience: [researcher, ml-engineer]
     tags: [llm-training, fine-tuning, papers, weekly-review]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
     landmark_posts:
       - title: "Understanding and Coding Self-Attention"
         url: https://magazine.sebastianraschka.com/p/understanding-and-coding-self-attention
@@ -158,13 +158,13 @@ sources:
 
   - name: "Eugene Yan"
     url: https://eugeneyan.com
-    rss: https://eugeneyan.com/rss.xml
+    rss: https://eugeneyan.com/rss
     type: individual
     depth: medium
     audience: [ml-engineer, builder]
     tags: [applied-ml, rag, recsys, evaluation, production]
-    activity: active
-    last_checked: 2026-05
+    activity: slow
+    last_checked: 2026-10
     landmark_posts:
       - title: "Patterns for Building LLM-based Systems & Products"
         url: https://eugeneyan.com/writing/llm-patterns/
@@ -172,13 +172,13 @@ sources:
 
   - name: "Jay Alammar"
     url: https://jalammar.github.io
-    rss: https://jalammar.github.io/feed.xml
+    rss: https://newsletter.languagemodels.co/feed   # now writes here; github.io blog last updated 2025-03
     type: individual
     depth: deep
     audience: [researcher, ml-engineer, curious]
     tags: [transformers, visualization, intuition, education]
     activity: slow
-    last_checked: 2026-05
+    last_checked: 2026-10
     landmark_posts:
       - title: "The Illustrated Transformer"
         url: https://jalammar.github.io/illustrated-transformer/
@@ -192,7 +192,7 @@ sources:
     audience: [builder, curious]
     tags: [llm-tools, prompt-engineering, tooling, practical]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
     landmark_posts:
       - title: "Everything I know about LLMs"
         url: https://simonwillison.net/2023/Aug/3/weird-world-of-llms/
@@ -200,13 +200,13 @@ sources:
 
   - name: "Hamel Husain"
     url: https://hamel.dev
-    rss: https://hamel.dev/feed.xml
+    rss: https://hamel.dev/index.xml
     type: individual
     depth: deep
     audience: [ml-engineer, builder]
     tags: [evals, fine-tuning, practical, production]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
     landmark_posts:
       - title: "Your AI Product Needs Evals"
         url: https://hamel.dev/blog/posts/evals/
@@ -222,8 +222,8 @@ sources:
     depth: deep
     audience: [ml-engineer, builder]
     tags: [mlops, production, inference, real-time-ml]
-    activity: slow
-    last_checked: 2026-05
+    activity: archived
+    last_checked: 2026-10
     landmark_posts:
       - title: "Building LLM applications for production"
         url: https://huyenchip.com/2023/04/11/llm-engineering.html
@@ -233,13 +233,13 @@ sources:
 
   - name: "vLLM Blog"
     url: https://blog.vllm.ai
-    rss: https://blog.vllm.ai/feed.xml
+    rss: https://vllm.ai/blog/rss.xml
     type: systems
     depth: deep
     audience: [ml-engineer]
     tags: [inference, serving, kv-cache, throughput, gpu]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
     landmark_posts:
       - title: "PagedAttention"
         url: https://blog.vllm.ai/2023/06/20/vllm.html
@@ -247,13 +247,13 @@ sources:
 
   - name: "Modal Blog"
     url: https://modal.com/blog
-    rss: https://modal.com/blog/rss.xml
+    rss: https://modal.com/blog/atom.xml
     type: systems
     depth: medium
     audience: [ml-engineer, builder]
     tags: [inference, serverless, gpu, deployment]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "Together AI Blog"
     url: https://www.together.ai/blog
@@ -263,17 +263,17 @@ sources:
     audience: [ml-engineer]
     tags: [inference, fine-tuning, speculative-decoding, open-source]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "Anyscale Blog"
     url: https://www.anyscale.com/blog
-    rss: https://www.anyscale.com/blog/rss.xml
+    rss: https://www.anyscale.com/rss.xml
     type: systems
     depth: medium
     audience: [ml-engineer, builder]
     tags: [ray, distributed, inference, serving]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   # ── Paper Explainers ──────────────────────────────────────────────────────
 
@@ -285,17 +285,17 @@ sources:
     audience: [researcher, ml-engineer]
     tags: [research-commentary, interviews, trends]
     activity: slow
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "The Batch (deeplearning.ai)"
     url: https://www.deeplearning.ai/the-batch/
-    rss: https://www.deeplearning.ai/the-batch/feed/
+    rss: https://charonhub.deeplearning.ai/rss/
     type: paper-explainer
     depth: medium
     audience: [ml-engineer, curious]
     tags: [weekly-digest, research-summary, andrew-ng]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "Interconnects (Nathan Lambert)"
     url: https://www.interconnects.ai
@@ -305,7 +305,7 @@ sources:
     audience: [researcher, ml-engineer]
     tags: [rlhf, alignment, policy, open-research]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
     landmark_posts:
       - title: "RLHF Book"
         url: https://rlhfbook.com
@@ -313,13 +313,13 @@ sources:
 
   - name: "Transformer Circuits Thread"
     url: https://transformer-circuits.pub
-    rss: https://transformer-circuits.pub/rss.xml
+    rss: https://transformer-circuits.pub/feed.xml
     type: paper-explainer
     depth: deep
     audience: [researcher]
     tags: [interpretability, mechanistic, circuits, superposition]
-    activity: slow
-    last_checked: 2026-05
+    activity: active
+    last_checked: 2026-10
     landmark_posts:
       - title: "In-context Learning and Induction Heads"
         url: https://transformer-circuits.pub/2022/in-context-learning-and-induction-heads/index.html
@@ -335,7 +335,7 @@ sources:
     audience: [ml-engineer, builder]
     tags: [open-source, fine-tuning, datasets, transformers-lib]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "Weights & Biases (W&B) Blog"
     url: https://wandb.ai/fully-connected
@@ -345,37 +345,37 @@ sources:
     audience: [ml-engineer]
     tags: [experiment-tracking, mlops, evals, fine-tuning]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "LangChain Blog"
     url: https://blog.langchain.dev
-    rss: https://blog.langchain.dev/rss/
+    rss: https://blog.langchain.dev/rss.xml
     type: applied
     depth: medium
     audience: [builder]
     tags: [agents, rag, tooling, orchestration]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "Braintrust Blog"
     url: https://www.braintrust.dev/blog
-    rss: https://www.braintrust.dev/blog/rss.xml
+    rss:              # no working official feed (checked 2026-10)
     type: applied
     depth: medium
     audience: [builder, ml-engineer]
     tags: [evals, production, benchmarking]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "Honeycomb Blog"
     url: https://www.honeycomb.io/blog
-    rss: https://www.honeycomb.io/blog/rss.xml
+    rss: https://www.honeycomb.io/feed
     type: applied
     depth: medium
     audience: [builder, ml-engineer]
     tags: [observability, production, llm-in-prod]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   # ── News & Aggregators ────────────────────────────────────────────────────
 
@@ -387,7 +387,7 @@ sources:
     audience: [researcher, curious]
     tags: [weekly, policy, research-digest, geopolitics]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "Last Week in AI"
     url: https://lastweekin.ai
@@ -397,7 +397,7 @@ sources:
     audience: [curious, builder]
     tags: [weekly-digest, news, broad-coverage]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "Latent Space"
     url: https://www.latent.space
@@ -407,7 +407,7 @@ sources:
     audience: [ml-engineer, builder]
     tags: [ai-engineering, papers, agents, tooling, weekly]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "Vicki Boykis"
     url: https://vickiboykis.com
@@ -417,7 +417,7 @@ sources:
     audience: [ml-engineer]
     tags: [embeddings, recsys, ml-infrastructure, engineering]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
     landmark_posts:
       - title: "What Are Embeddings"
         url: https://vickiboykis.com/what_are_embeddings/
@@ -433,7 +433,7 @@ sources:
     audience: [researcher, ml-engineer, builder]
     tags: [gemini, multimodal, tpu, search, responsible-ai]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "Microsoft Research Blog"
     url: https://www.microsoft.com/en-us/research/blog/
@@ -443,7 +443,7 @@ sources:
     audience: [researcher, ml-engineer]
     tags: [phi, azure-ai, reasoning, multimodal, rl]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "BAIR Blog"
     url: https://bair.berkeley.edu/blog/
@@ -453,7 +453,7 @@ sources:
     audience: [researcher, ml-engineer]
     tags: [robotics, rl, computer-vision, nlp, safety, berkeley]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "NVIDIA Technical Blog (AI)"
     url: https://developer.nvidia.com/blog/category/artificial-intelligence/
@@ -463,17 +463,17 @@ sources:
     audience: [ml-engineer]
     tags: [gpu, cuda, inference, training, tensorrt, triton]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "EleutherAI Blog"
     url: https://blog.eleuther.ai/
-    rss: https://blog.eleuther.ai/rss.xml
+    rss:              # no working official feed (checked 2026-10)
     type: lab
     depth: deep
     audience: [researcher, ml-engineer]
     tags: [open-source, gpt-neox, interpretability, evaluation, scaling]
-    activity: slow
-    last_checked: 2026-05
+    activity: active
+    last_checked: 2026-10
     landmark_posts:
       - title: "Pythia: A Suite for Analyzing Large Language Models"
         url: https://blog.eleuther.ai/pythia/
@@ -481,13 +481,13 @@ sources:
 
   - name: "Apple Machine Learning Research"
     url: https://machinelearning.apple.com
-    rss: https://machinelearning.apple.com/rss/news.rss
+    rss: https://machinelearning.apple.com/rss.xml
     type: lab
     depth: deep
     audience: [researcher, ml-engineer]
     tags: [on-device, efficiency, privacy, multimodal, speech]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   # ── New: Individuals ──────────────────────────────────────────────────────
 
@@ -498,8 +498,8 @@ sources:
     depth: medium
     audience: [ml-engineer, builder]
     tags: [practical-dl, education, fine-tuning, pytorch]
-    activity: slow
-    last_checked: 2026-05
+    activity: active
+    last_checked: 2026-10
     landmark_posts:
       - title: "Practical Deep Learning for Coders (course launch)"
         url: https://www.fast.ai/posts/2022-07-21-dl-coders-22.html
@@ -507,75 +507,75 @@ sources:
 
   - name: "Answer.AI"
     url: https://www.answer.ai
-    rss: https://www.answer.ai/rss.xml
+    rss: https://www.answer.ai/index.xml
     type: individual
     depth: medium
     audience: [ml-engineer, builder]
     tags: [practical-ai, efficiency, open-source, fine-tuning]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "Jeremy Howard (substack)"
     url: https://jeremy.fast.ai
-    rss: https://jeremy.fast.ai/index.xml
+    rss:              # no working official feed (checked 2026-10)
     type: individual
     depth: medium
     audience: [ml-engineer, builder]
     tags: [practical-ai, fine-tuning, open-source]
-    activity: slow
-    last_checked: 2026-05
+    activity: archived
+    last_checked: 2026-10
 
   # ── New: Systems & Infrastructure ─────────────────────────────────────────
 
   - name: "Replicate Blog"
     url: https://replicate.com/blog
-    rss: https://replicate.com/blog/rss.xml
+    rss: https://replicate.com/blog/rss
     type: systems
     depth: medium
     audience: [ml-engineer, builder]
     tags: [model-deployment, inference, open-source-models, api]
-    activity: active
-    last_checked: 2026-05
+    activity: slow
+    last_checked: 2026-10
 
   - name: "Groq Blog"
     url: https://groq.com/blog/
-    rss: https://groq.com/blog/rss.xml
+    rss:              # no working official feed (checked 2026-10)
     type: systems
     depth: medium
     audience: [ml-engineer, builder]
     tags: [inference, lpu, throughput, hardware]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "Ollama Blog"
     url: https://ollama.com/blog
-    rss: https://ollama.com/blog/rss
+    rss: https://ollama.com/blog/rss.xml
     type: systems
     depth: medium
     audience: [builder, ml-engineer]
     tags: [local-llm, inference, open-source, self-hosted]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "Lightning AI Blog"
     url: https://lightning.ai/blog
-    rss: https://lightning.ai/blog/rss.xml
+    rss:              # no working official feed (checked 2026-10)
     type: systems
     depth: medium
     audience: [ml-engineer, builder]
     tags: [pytorch-lightning, training, mlops, cloud-gpu]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "LlamaIndex Blog"
     url: https://www.llamaindex.ai/blog
-    rss: https://www.llamaindex.ai/blog/rss.xml
+    rss:              # no working official feed (checked 2026-10)
     type: systems
     depth: medium
     audience: [builder]
     tags: [rag, agents, indexing, llm-orchestration]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   # ── New: Applied / Company Engineering Blogs ──────────────────────────────
 
@@ -587,47 +587,47 @@ sources:
     audience: [ml-engineer, builder]
     tags: [computer-vision, object-detection, datasets, annotation, yolo]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "Scale AI Blog"
     url: https://scale.com/blog
-    rss: https://scale.com/blog/rss.xml
+    rss:              # no working official feed (checked 2026-10)
     type: applied
     depth: medium
     audience: [ml-engineer, builder]
     tags: [data, annotation, evals, fine-tuning, rlhf]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "Runway Blog"
     url: https://runwayml.com/blog
-    rss: https://runwayml.com/blog/rss.xml
+    rss:              # no working official feed (checked 2026-10)
     type: applied
     depth: shallow
     audience: [builder, curious]
     tags: [generative-video, creative-ai, multimodal, research]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "Arize AI Blog"
     url: https://arize.com/blog/
-    rss: https://arize.com/blog/rss.xml
+    rss: https://arize.com/feed/
     type: applied
     depth: medium
     audience: [ml-engineer, builder]
     tags: [observability, monitoring, evals, production, llm-tracing]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "Evidently AI Blog"
     url: https://www.evidentlyai.com/blog
-    rss: https://www.evidentlyai.com/blog/rss.xml
+    rss:              # no working official feed (checked 2026-10)
     type: applied
     depth: medium
     audience: [ml-engineer, builder]
     tags: [ml-monitoring, drift, data-quality, evals, production]
-    activity: active
-    last_checked: 2026-05
+    activity: slow
+    last_checked: 2026-10
 
   # ── New: Paper Explainers ─────────────────────────────────────────────────
 
@@ -639,7 +639,7 @@ sources:
     audience: [researcher, ml-engineer]
     tags: [alignment, safety, interpretability, agent-foundations, risk]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
     landmark_posts:
       - title: "Concrete Problems in AI Safety"
         url: https://www.alignmentforum.org/posts/AWoZBzxdm6K3oimoM/concrete-problems-in-ai-safety
@@ -647,32 +647,32 @@ sources:
 
   - name: "Papers With Code Blog"
     url: https://paperswithcode.com/blog
-    rss: https://paperswithcode.com/blog/feed/
+    rss:              # no working official feed (checked 2026-10)
     type: paper-explainer
     depth: medium
     audience: [researcher, ml-engineer]
     tags: [benchmarks, sota, reproducibility, open-science]
-    activity: slow
-    last_checked: 2026-05
+    activity: archived
+    last_checked: 2026-10
 
   # ── New: News & Digests ───────────────────────────────────────────────────
 
   - name: "Ben's Bites"
     url: https://www.bensbites.com
-    rss: https://bensbites.beehiiv.com/feed
+    rss: https://www.bensbites.com/feed
     type: news
     depth: shallow
     audience: [builder, curious]
     tags: [daily-digest, product-news, startup, tools]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10
 
   - name: "TLDR AI"
     url: https://tldr.tech/ai
-    rss: https://tldr.tech/ai/rss
+    rss: https://tldr.tech/api/rss/ai
     type: news
     depth: shallow
     audience: [builder, curious]
     tags: [daily-digest, research-news, product-launches]
     activity: active
-    last_checked: 2026-05
+    last_checked: 2026-10

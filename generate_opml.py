@@ -12,7 +12,6 @@ Outputs:
 
 import json
 import sys
-from datetime import datetime, timezone
 from pathlib import Path
 from xml.etree.ElementTree import Element, SubElement, indent, tostring
 
@@ -51,9 +50,6 @@ def build_opml(sources: list[dict]) -> Element:
 
     head = SubElement(root, "head")
     SubElement(head, "title").text = "AI Signal — Curated AI sources"
-    SubElement(head, "dateCreated").text = datetime.now(timezone.utc).strftime(
-        "%a, %d %b %Y %H:%M:%S +0000"
-    )
     SubElement(head, "ownerName").text = "AI Signal"
     SubElement(head, "ownerEmail").text = "contribute via GitHub PR"
     SubElement(head, "docs").text = "https://github.com/amikumar91/ai-signal"
@@ -123,7 +119,7 @@ def _source_to_js(s: dict) -> str:
 
     name     = _js_str(s.get("name", ""))
     url      = _js_str(s.get("url", ""))
-    rss      = _js_str(s.get("rss", ""))
+    rss      = _js_str(s.get("rss") or "")
     stype    = _js_str(s.get("type", ""))
     depth    = _js_str(s.get("depth", ""))
     audience = _js_str_array(s.get("audience", []))
