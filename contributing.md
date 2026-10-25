@@ -116,6 +116,18 @@ Activity update PRs can batch multiple sources in one commit.
 - **Sources without a clear point of view** — generic aggregators with no editorial judgement
 - **Dead sources** — no posts in 18+ months, unless landmark posts justify keeping it archived
 
+### Non-English sources
+
+Welcome, if they meet the same bar as everything else: focused on AI, free to read, original analysis or a clear editorial point of view. Reviewers work mainly in English, so evaluation may take a little longer.
+
+### AI-assisted writing
+
+Using AI as a writing tool is fine. Sites where most content is AI-generated, or that mainly summarise other outlets' news, usually fall under "no clear point of view" above.
+
+### Same process for every source
+
+Every listed source is handled the same way: its feed is checked weekly by automation, and its public posts may be read by the optional `/curate` tooling. We can't offer per-source exceptions to this.
+
 ---
 
 ## Removing a source
@@ -168,3 +180,5 @@ When submitting a PR for sources found via `/curate`, note that in your PR descr
 ## License
 
 By contributing, you agree your contributions are licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+
+This licence covers the catalogue entries in this repo — names, tags, ratings, and short notes like landmark `why` lines. It does not cover the linked articles, feeds, or images, which remain with their authors. AI Signal links to posts; it doesn't republish them.
