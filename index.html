@@ -590,7 +590,7 @@
   <div class="footer-inner">
     <p>
       <strong>AI Signal</strong> is open source and community maintained.
-      Sources verified <strong>May 2026</strong>.
+      Sources verified <strong id="verified-date">October 2026</strong>.
     </p>
     <div class="footer-links">
       <a href="https://github.com/amikumar91/ai-signal" target="_blank">GitHub</a>
@@ -1117,6 +1117,12 @@ document.getElementById('filters').addEventListener('click', function(e) {
 document.getElementById('total-count').textContent = SOURCES.length;
 document.getElementById('rss-count').textContent = SOURCES.filter(s => s.rss).length;
 document.getElementById('landmark-count').textContent = SOURCES.reduce((n, s) => n + (s.landmarks ? s.landmarks.length : 0), 0);
+const latestCheck = SOURCES.map(s => String(s.last_checked)).sort().pop();
+if (latestCheck) {
+  const [y, m] = latestCheck.split('-').map(Number);
+  document.getElementById('verified-date').textContent =
+    new Date(y, m - 1).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+}
 renderAll();
 </script>
 </body>
