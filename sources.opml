@@ -56,6 +56,7 @@
       <outline type="rss" text="Arize AI Blog" title="Arize AI Blog" xmlUrl="https://arize.com/feed/" htmlUrl="https://arize.com/blog/" description="[medium] [ml-engineer, builder] observability, monitoring, evals, production, llm-tracing" />
     </outline>
     <outline text="News &amp; Digests" title="News &amp; Digests">
+      <outline type="rss" text="AIHOT Daily" title="AIHOT Daily" xmlUrl="https://aihot.news/feed/daily.xml" htmlUrl="https://aihot.news/daily" description="[shallow] [builder, curious] daily-digest, research-news, model-releases, chinese-language" />
       <outline type="rss" text="Import AI (Jack Clark)" title="Import AI (Jack Clark)" xmlUrl="https://importai.substack.com/feed" htmlUrl="https://importai.substack.com" description="[medium] [researcher, curious] weekly, policy, research-digest, geopolitics" />
       <outline type="rss" text="Last Week in AI" title="Last Week in AI" xmlUrl="https://lastweekin.ai/feed" htmlUrl="https://lastweekin.ai" description="[shallow] [curious, builder] weekly-digest, news, broad-coverage" />
       <outline type="rss" text="Ben's Bites" title="Ben's Bites" xmlUrl="https://www.bensbites.com/feed" htmlUrl="https://www.bensbites.com" description="[shallow] [builder, curious] daily-digest, product-news, startup, tools" />
